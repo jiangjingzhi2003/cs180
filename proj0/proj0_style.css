@@ -1,0 +1,74 @@
+@import url("../main_style.css");
+
+.question_header {
+  width: min(800px, 90%);   /* shrink the whole section */
+  margin: 2rem auto;        /* center on the page */
+  text-align: center;
+}
+
+.question_header h3 {
+  margin-bottom: 1rem;
+}
+
+.q1 {
+  width: min(800px, 90%);   /* shrink the whole section */
+  margin: 2rem auto;        /* center on the page */
+  text-align: center;
+}
+
+.q1 h3 {
+  margin-bottom: 1rem;
+}
+
+/* Tight 2-column row of figures */
+.q1_images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* two equal columns */
+  column-gap: 5px;                       /* <-- control the gap here */
+  row-gap: 12px;
+  justify-content: center;                /* center the grid block */
+}
+
+/* Remove default figure margins */
+.q1_images figure { margin: 0; }
+
+.q1_image {
+  width: 45%;   /* shrink both images equally */
+  height: auto; /* keep aspect ratio */
+  border-radius: 6px;
+}
+
+.q2 {
+  width: min(800px, 90%);   /* shrink the whole section */
+  margin: 2rem auto;        /* center on the page */
+  text-align: center;
+}
+
+.q2 h3 {
+  margin-bottom: 1rem;
+}
+
+.q3 {
+  width: min(800px, 90%);   /* shrink the whole section */
+  margin: 2rem auto;        /* center on the page */
+  text-align: center;
+}
+
+.q3 h3 {
+  margin-bottom: 1rem;
+}
+
+.navbar {
+  background: #e6f0ff;
+  padding: 1rem;
+  text-align: center;
+}
+.navbar a {
+  color: black;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}

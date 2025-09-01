@@ -130,3 +130,21 @@ header h3 {
   font-style: italic;
   text-align: center;
 }
+
+footer {
+    margin-top: 28px;
+    padding: 24px 0;
+    border-top: 1px solid gray;  /* you don't need both border-top + border-color */
+    font-size: 14px;
+    background: #f9f9f9;         /* light background helps separate footer */
+    color: gray;
+    text-align: center;          /* center text by default */
+}
+
+.footnote {
+    text-align: left;            /* override for footnotes */
+    max-width: 800px;
+    margin: 0 auto;              /* center within the page */
+    font-size: 13px;
+    color: #666;
+}

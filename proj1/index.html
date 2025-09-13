@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="proj1_style.css">
+</head>
+<body>
+    <header>
+        <h1 class="centered">Project 1</h1>
+        <nav class="navbar">
+            <a href="../index.html">Home</a>
+            <a href="../index.html">Projects</a>
+        </nav>
+    </header>
+    <main>
+        <div class="description">
+            <h3>Naive Approach</h3>
+                <p>
+                    The goal of this assignment is to take the digitized Prokudin-Gorskii glass plate images and, using image processing techniques like image pyramid, automatically produce a color image with as few visual artifacts as possible.
+                    In this assignment, I will first try to align red channel and green channel image with blue channel spearately and stack them back to create color image.
+                </p>
+
+                <p><strong>Naive Image Alignment Approach:</strong></p>
+
+                <ol>
+                    <li>
+                        <strong>Metric:</strong> I use <em>Normalized Cross-Correlation (NCC)</em> as the alignment metric, since it is more robust to brightness differences across color channels. NCC is simply a dot product between two normalized vectors: (image1./||image1|| and image2./||image2||).
+                    </li>
+                    <li>
+                        <strong>Search Window:</strong> I define a fixed window size of (30, 30). This means searching shifts in the range of -30 to +30 pixels along both the x and y axes.
+                    </li>
+                    <li>
+                        <strong>Preprocessing:</strong> To reduce border artifacts and improve alignment accuracy, I crop 20 pixels from each edge of the input images.
+                    </li>
+                    <li>
+                        <strong>Exhaustive Search:</strong> I perform a nested loop over all possible shifts within the window:
+                        <ul>
+                            <li>The outer loop iterates over vertical (y-axis) shifts.</li>
+                            <li>The inner loop iterates over horizontal (x-axis) shifts.</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <strong>Cropping:</strong> To improve alignment, I manually crop 20 line of on each side of image so we can align without the noise from the border.
+                    </li>
+
+                    <li>
+                        <strong>Overlap Handling:</strong> For each candidate shift, I roll the image using <code>np.roll</code>, compute the overlapping region between the two channels, and then calculate the NCC metric on this overlap to minimize noise.
+                    </li>
+                    <li>
+                        <strong>Optimal Shift Application:</strong> After identifying the best shift within the search window, I apply it to the target channel. For example, when aligning the red channel to the blue channel, the computed shift is applied directly to the red channel.
+                    </li>
+                    <li>
+                        <strong>Repeat for All Channels:</strong> I repeat the same procedure to align the green channel with the blue channel.
+                    </li>
+                    <li>
+                        <strong>Image Reconstruction:</strong> Once both red and green channels are aligned, I combine the three channels using <code>np.dstack</code>. Finally, I convert the result to JPEG-compatible format with <code>img_as_ubyte</code> and save the reconstructed color image.
+                    </li>
+                </ol>
+        </div>
+        <div class="imgs_gallery">
+            <h4>Aligned Images</h4>
+            <div class="grid">
+                <figure>
+                    <img src="./code/output/cathedral_align_naive.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (5 2) ; ar: (12 3)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/monastery_align_naive.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (-3, 2), ar: (3, 2)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/tobolsk_align_naive.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (3, 3), ar: (6, 3)</figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="description">
+            <section>
+            <h3>Multi-Scale Alignment with a Gaussian Image Pyramid</h3>
+            <p>
+                For large <code>.tif</code> files, I speed up alignment using a
+                <strong>Gaussian image pyramid</strong>. I align the red and green channels
+                to the blue channel independently.
+            </p>
+
+            <ol>
+                <li>
+                <strong>Build the pyramid.</strong>
+                I apply a (5×5) Gaussian kernel at each level (implemented with
+                <code>np.lib.stride_tricks.sliding_window_view</code> and
+                <code>np.einsum</code>) to blur the image, then downsample by a factor of
+                2 along each axis to create the next level. The number of levels is
+                controlled by a <code>level</code> parameter. To avoid excessive shrinking,
+                I stop building the pyramid if either image dimension is
+                <code>&le; 100</code> pixels.
+                </li>
+
+                <li>
+                <strong>Search window.</strong>
+                I use a fixed window of <code>(20, 20)</code>, i.e., integer shifts from
+                <code>−20</code> to <code>+20</code> in both axes.
+                </li>
+
+                <li>
+                <strong>Exhaustive search at each level.</strong>
+                For a given level, I loop over all possible shifts within the window:
+                <ul>
+                    <li>Outer loop: vertical (y-axis) shifts</li>
+                    <li>Inner loop: horizontal (x-axis) shifts</li>
+                </ul>
+                During metric calculation, I compute only the overlapping region of the two images.
+                To reduce noise, I also crop borders by ~6% on each side to avoid edge artifacts:
+                top/bottom by <code>0.06 × H</code>, left/right by <code>0.06 × W</code>. 
+                <p>To deal with small image like jpg doesn't crop enough, I set fixed size 65 pixels to crop on each side if the percentage caculation is less than 65</p>
+                </li>
+
+                <li>
+                <strong>Coarsest-to-finest refinement.</strong>
+                I recurse down to the <em>coarsest</em> level, find the best shift there,
+                then move one level finer, pre-shifting by the previous best shift and refining
+                with a smaller window (e.g., <code>(5, 5)</code>). I repeat this until I
+                reach the original resolution.
+                </li>
+
+                <li>
+                <strong>Scoring metric.</strong>
+                At every level I use <strong>Normalized Cross-Correlation (NCC)</strong>
+                to score candidate shifts (higher is better), evaluating all shifts via a
+                nested loop.
+                </li>
+            </ol>
+
+            <p>
+                This coarse-to-fine strategy finds a good global shift at low resolution
+                and then fine-tunes it as the resolution increases.
+            </p>
+            </section>
+
+            <section>
+            <h3>Performance Notes & Tweaks</h3>
+            <ul>
+                <li>
+                <strong>Overlap-only scoring:</strong> Computing NCC on just the
+                overlapping area reduces cost and avoids border padding effects.
+                </li>
+            </ul>
+            </section>
+
+        </div>
+        <div class="imgs_gallery">
+            <h4>Aligned Images</h4>
+            <div class="grid">
+                <figure>
+                    <img src="./code/output/cathedral_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (3, 2), ar: (10, 3)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/church_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (23, 3), ar: (58, -4)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/harvesters_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (59, 16), ar: (123, 13)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/icon_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (40, 16), ar: (88, 22)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/italil_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (37, 20), ar: (75, 34)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/lastochikino_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (-2, -1), ar: (75, -7)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/lugano_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (38, -15), ar: (91, -28)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/melons_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (81, 10), ar: (178, 13)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/monastery_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (-3, 1), ar: (2, 2)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/self_portrait_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (77, 26), ar: (173, 34)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/siren_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (48, -6), ar: (93, -24)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/three_generations_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (53, 13), ar: (111, 10)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/tobolsk_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (2, 2), ar: (6, 3)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/emir_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (47, 24), ar: (0, -699)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/master-pnp-prok-00100-00185a_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (56, 5), ar: (122, -5)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./code/output/master-pnp-prok-00200-00251a_align.jpg" alt="align image" class="q1_image">
+                    <figcaption>best shift (y,x) is ag: (39, 1), ar: (127, 1)</figcaption>
+                </figure>
+            </div>
+        </div>
+    <section>
+        <div class="description">
+            <h3>Failusre Analysis</h3>
+            <p>
+                From above image pyramid aligned iamge, you can see emir.tif aligned poorly.
+                The major reason for that during I alignment I crop too much image and cause it lost too much information during coraest level and thus lead to bad alignment.
+            </p>
+        </div>
+        <div class="grid_2">
+            <figure>
+                <img src="./code/output/emir_coraest.png" alt="align image" class="q1_image">
+                <figcaption>best shift (y,x) is ag: (3, 2), ar: (10, 3)</figcaption>
+            </figure>
+            <figure>
+                <img src="./code/output/emir_align.jpg" alt="align image" class="q1_image">
+                <figcaption>best shift (y,x) is ag: (49, 23), ar: (102, 40)</figcaption>
+            </figure>
+        </div>
+        <div class="description">
+            <p>
+                By cropping less on the imge,I can achieve almost perfect alignment on emir.tif
+                with parameter:     
+                <p>ag, ag_shift = align((20, 20), b, g, 6, metric_func=ncc, overlap_views=True, default_window=(5,5), percent=0.024)</p>
+                <p>ar_shift = align((20, 20), b, r, 6, metric_func=ncc, overlap_views=True, default_window=(5,5), percent=0.024)</p>
+                which means cropping only 2.4% on each side.
+            </p>
+        </div>
+        <div class="grid_2">
+            <figure>
+                <img src="./code/output/emir_coraest_best.png" alt="align image" class="q1_image">
+            </figure>
+            <figure>
+                <img src="./code/output/emir_best.png" alt="align image" class="q1_image">
+                <figcaption>emir best shift (y,x) is ag: (49, 23), ar: (102, 40)</figcaption>
+            </figure>
+        </div>
+    </section>
+    </main>
+</body>

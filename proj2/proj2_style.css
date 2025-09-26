@@ -1,0 +1,74 @@
+.navbar {
+  background: #e6f0ff;
+  padding: 1rem;
+  text-align: center;
+}
+.navbar a {
+  color: black;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.description {
+    max-width: 1000px;
+    margin: 0 auto;       /* centers horizontally */
+    padding: 20px;
+  }
+
+.grid_2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 3 images per row */
+    gap: 15px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.grid_hybrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+    gap: 15px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.stack {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); /* 3 images per row */
+    gap: 15px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.grid_3 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 3 images per row */
+    gap: 15px;
+    max-width: 1000px;
+    margin: auto;
+}
+.grid_4 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+    gap: 15px;
+    max-width: 600px;
+    margin: auto;
+}
+
+figure {
+    margin: 0;
+    text-align: center;
+}
+figure img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+figcaption {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #444;
+}

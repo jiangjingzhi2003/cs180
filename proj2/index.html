@@ -144,7 +144,8 @@ def convovle_2(img, kernel, mode='constant'):
         <p>
             For binary edge image, to remove most of noise in the background, I chose threshold = 0.3. 
             This will make image lost most edges in the buildings in the background and weaker edge on cameraman.
-            But this threshold can remove most noise in the sky and land.
+            But this threshold can remove most noise in the sky and land. 
+            This threshold can make sure I get most camerman edges with little noise.
         </p>
         </div>
         <div class='subproblem'>
@@ -209,8 +210,8 @@ def convovle_2(img, kernel, mode='constant'):
             <h4>Part 2.1: Image "Sharpening"</h4>
             <div class="description">
                 <p>
-                    implemenet the gaussian kernel which is unsharp mask kernel, 
-                    then convolve image with the kernel gave us the unsharp mask filter function
+                    implemenet the gaussian kernel
+                    then convolve image with the kernel gave us the blurring/low-pass filter function
                     <pre><code> 
                         g1d = cv2.getGaussianKernel(3,1)
                         g2d = np.outer(g1d, g1d)
@@ -229,14 +230,16 @@ def convovle_2(img, kernel, mode='constant'):
                     To sharpen the image, you will need apply unsharp mask filter(gaussian filter) to create an image with low frequency and 
                     get high frequency image by subtracting low frequency image from original image.
                     Then you add high frequency image back to original image to increase the intensity of the edge of high frequency and create sharpening effect.
+                    As a result, we get unsharp mask filter.
                 </p>
                 <figure>
                     <img src="./q2/sharpen_formula.png" alt="q2" class="q2_image">
                     <figcaption>Formula to sharpen image in one convolution</figcaption>
                 </figure>
                 <p>
-                    using the formula above, we can finish sharpening in one convolution and can change sharpen intensity by changing alpha
+                    Using the formula above, we can finish sharpening in one convolution and can change sharpen intensity by changing alpha
                     The higher the alpha value is,the stronger the sharpening effect is.
+                    Where f is the image, g is gaussian kernel, e is identity kernel, alpha is constant.
                 </p>
             </div>
             <div class="grid_3">
@@ -286,9 +289,14 @@ def convovle_2(img, kernel, mode='constant'):
                 </figure>
                 <figure>
                     <img src="./q2/campus_resharp.jpg" alt="selfie" class="q2_image">
-                    <figcaption>resharp campus image, alpha=7</figcaption>
+                    <figcaption>resharp campus image, alpha=10</figcaption>
                 </figure>
             </div>
+            <h4> obseravtion </h4>
+            <p>By trying to blur the image and resharpen it, we can see it loses some details after resharpen. 
+                After resharp, we can see noise around the edges of the buildings because we overlap too many high frequency values.
+                So resharpend image sometimes can't reproduce the origianl image.
+            </p>
         </div>
         <div class='subproblem'>
             <h4>Part 2.2: Hybrid Images</h4>
@@ -576,7 +584,7 @@ def convovle_2(img, kernel, mode='constant'):
                 <figure>
                     <img src="./q2.3/Oraple_4.jpg" alt="q2" class="q2_image">
                 </figure>
-                                <figure>
+                <figure>
                     <img src="./q2.3/apole_mask_5.jpg" alt="q2" class="q2_image">
                 </figure>
                 <figure>

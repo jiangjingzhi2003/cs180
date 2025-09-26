@@ -143,7 +143,7 @@ footer {
 
 .footnote {
     text-align: left;            /* override for footnotes */
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;              /* center within the page */
     font-size: 13px;
     color: #666;

@@ -152,6 +152,39 @@ def convovle_2(img, kernel, mode='constant'):
             <p>
                 One way to create DoG filter: Convolve the gaussian kernel with D_x and D_y
             </p>
+            <p>
+                Here is visualization of DoG filter with Dx and Dy filter. 
+                To make effect obvious I used kernel size (70,70) and sigma 30
+            </p>
+            <div class="grid_2">
+                <figure>
+                    <img src="./q1/gaussian_kernel.jpg" alt="selfie" class="q1_image">
+                    <figcaption>Gaussian kernel</figcaption>
+                </figure>
+                <figure>
+                    <img src="./q1/scipy_convovle_gausssian_dx.jpg" alt="selfie" class="q1_image">
+                    <figcaption>Gaussian kernel after convovle with Dx</figcaption>
+                </figure>
+                <figure>
+                    <img src="./q1/scipy_convovle_gausssian_dy.jpg" alt="selfie" class="q1_image">
+                    <figcaption>Gaussian kernel after convovle with Dy</figcaption>
+                </figure>
+            </div>
+            <p>Visualization for kernel size (3,3) and sigma 1</p>
+            <div class="grid_2">
+                <figure>
+                    <img src="./q1/gaussian_kernel_3.jpg" alt="selfie" class="q1_image">
+                    <figcaption>Gaussian kernel</figcaption>
+                </figure>
+                <figure>
+                    <img src="./q1/scipy_convovle_gausssian_dx_3.jpg" alt="selfie" class="q1_image">
+                    <figcaption>Gaussian kernel after convovle with Dx</figcaption>
+                </figure>
+                <figure>
+                    <img src="./q1/scipy_convovle_gausssian_dy_3.jpg" alt="selfie" class="q1_image">
+                    <figcaption>Gaussian kernel after convovle with Dy</figcaption>
+                </figure>
+            </div>
             <div class="grid_2">
                 <figure>
                     <img src="./q1/binary_edges.jpg" alt="selfie" class="q1_image">
@@ -428,6 +461,7 @@ def convovle_2(img, kernel, mode='constant'):
                 </figure>
             </div>
             <h5>Laplacian Stack for apple</h5>
+            <p>Note: Laplacian Stack share same lowest level image as Gaussian Stack</p>
             <div class="stack">
                 <figure>
                     <img src="./q2.3/apple_laplacian_1.jpg" alt="q2" class="q2_image">
@@ -440,6 +474,12 @@ def convovle_2(img, kernel, mode='constant'):
                 </figure>
                 <figure>
                     <img src="./q2.3/apple_laplacian_4.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/apple_laplacian_5.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/apple_gaussian_5.jpg" alt="q2" class="q2_image">
                 </figure>
             </div>
             <h5>Laplacian Stack for orange</h5>
@@ -455,6 +495,33 @@ def convovle_2(img, kernel, mode='constant'):
                 </figure>
                 <figure>
                     <img src="./q2.3/orange_laplacian_4.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/orange_laplacian_5.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/orange_gaussian_5.jpg" alt="q2" class="q2_image">
+                </figure>
+            </div>
+            <h5>Gaussian Stack for the mask</h5>
+            <div class="stack">
+                <figure>
+                    <img src="./q2.3/half_mask.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/mask_gaussian_1.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/mask_gaussian_2.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/mask_gaussian_3.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/mask_gaussian_4.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/mask_gaussian_5.jpg" alt="q2" class="q2_image">
                 </figure>
             </div>
             <div class="description">
@@ -509,6 +576,15 @@ def convovle_2(img, kernel, mode='constant'):
                 <figure>
                     <img src="./q2.3/Oraple_4.jpg" alt="q2" class="q2_image">
                 </figure>
+                                <figure>
+                    <img src="./q2.3/apole_mask_5.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/orange_mask_5.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/Oraple_5.jpg" alt="q2" class="q2_image">
+                </figure>
             </div>
         </div>
         <div class='subproblem'>
@@ -519,6 +595,9 @@ def convovle_2(img, kernel, mode='constant'):
                 </figure>
                 <figure>
                     <img src="./q2.4/orange.jpeg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.3/half_mask.jpg" alt="q2" class="q2_image">
                 </figure>
                 <figure>
                     <img src="./q2.3/Oraple_final.jpg" alt="q2" class="q2_image">
@@ -532,6 +611,9 @@ def convovle_2(img, kernel, mode='constant'):
                     <img src="./q2.4/fresh_banana.jpg" alt="q2" class="q2_image">
                 </figure>
                 <figure>
+                    <img src="./q2.3/half_mask.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
                     <img src="./q2.4/merge_banana.jpg" alt="q2" class="q2_image">
                 </figure>
             </div>
@@ -541,6 +623,9 @@ def convovle_2(img, kernel, mode='constant'):
                 </figure>
                 <figure>
                     <img src="./q2.4/eye.jpg" alt="q2" class="q2_image">
+                </figure>
+                <figure>
+                    <img src="./q2.4/eye_mask.jpg" alt="q2" class="q2_image">
                 </figure>
                 <figure>
                     <img src="./q2.4/hand_eye.jpg" alt="q2" class="q2_image">

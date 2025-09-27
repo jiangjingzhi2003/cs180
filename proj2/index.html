@@ -151,7 +151,8 @@ def convovle_2(img, kernel, mode='constant'):
         <div class='subproblem'>
             <h4>Part 1.3: Derivative of Gaussian (DoG) Filter</h4>
             <p>
-                One way to create DoG filter: Convolve the gaussian kernel with D_x and D_y
+                One way to create DoG filter: Convolve the gaussian kernel with D_x and D_y.
+                The other way is create a blurred version of the original image by convolving with a gaussian and then apply Dx and Dy on the blured image then create binary edge image.
             </p>
             <p>
                 Here is visualization of DoG filter with Dx and Dy filter. 
@@ -174,15 +175,15 @@ def convovle_2(img, kernel, mode='constant'):
             <p>Visualization for kernel size (3,3) and sigma 1, this the kernel I actually used for DoG filter implementation</p>
             <div class="grid_2">
                 <figure>
-                    <img src="./q1/gaussian_kernel_3.jpg" alt="selfie" class="q1_image">
+                    <img src="./q1/gaussian_original.jpeg" alt="selfie" class="q1_image">
                     <figcaption>Gaussian kernel</figcaption>
                 </figure>
                 <figure>
-                    <img src="./q1/scipy_convovle_gausssian_dx_3.jpg" alt="selfie" class="q1_image">
+                    <img src="./q1/gaussian_dx.jpeg" alt="selfie" class="q1_image">
                     <figcaption>Gaussian kernel after convovle with Dx</figcaption>
                 </figure>
                 <figure>
-                    <img src="./q1/scipy_convovle_gausssian_dy_3.jpg" alt="selfie" class="q1_image">
+                    <img src="./q1/gaussian_dy.jpeg" alt="selfie" class="q1_image">
                     <figcaption>Gaussian kernel after convovle with Dy</figcaption>
                 </figure>
             </div>
@@ -200,8 +201,12 @@ def convovle_2(img, kernel, mode='constant'):
                     <figcaption>DoG Filter then Binary Edges, threshold: 0.21</figcaption>
                 </figure>
             </div>
-            <p>From above images, we can see using DoG filter we can remove most of noise in the background and preserve the main edges of cameraman
-                DoG filter and blur image then apply Dx Dy on the blurred image can create same image
+            <p>
+                From above images, we can see using DoG filter we can remove most of noise in the background and preserve the main edges of cameraman.
+                Using DoG filter can remove more noise and preserve more detail than using Finite Difference Operator directly.
+            </p>
+            <p>
+                Using DoG filter to create bineary edge with one convolution and blurring image then apply Dx Dy on the blurred image can create same output image.
             </p>
         </div>
     </div>

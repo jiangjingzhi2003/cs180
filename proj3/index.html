@@ -1092,6 +1092,113 @@ target coordinate:
             <figcaption>alpha blending image</figcaption>
         </figure>
     </div>
+    <div class="description">
+        <h2>Part B: FEATURE MATCHING for AUTOSTITCHING</h2>
+        <h3>B.1: Harris Corner Detection</h3>
+        <figure>
+            <img src="./partB/harris_matrix.png" alt="selfie" class="q1_image">
+            <figcaption>Harris Matrix</figcaption>
+        </figure>
+        <figure>
+            <img src="./partB/corner_strength.png" alt="selfie" class="q1_image">
+            <figcaption>corner strength</figcaption>
+        </figure>
+        <p>Interest points are located where the corner strength f_HM(x,y) is a local maximum in a 3 × 3 neighbourhood, and above a threshold t = f_HM.max() * 0.01.</p>
+
+        <h4>Adaptive Non-Maximal Suppression</h4>
+        <p>First calculate minimum suppression radius r_i for each interest x_i</p>
+        <figure>
+            <img src="./partB/ANMS.png" alt="selfie" class="q1_image">
+            <figcaption>minimum suppression radius formula for point x_i</figcaption>
+        </figure>
+        <p>We use a value crobust = 0.9, which ensures that a neighbour must have significantly higher strength for suppression to take place.
+             We select the nip = 500interest points with the largest values of r_i.</p>
+
+        <div class="grid_2">
+            <figure>
+                <img src="./partB/pan1/center_with_points.jpeg" alt="selfie" class="q1_image">
+                <figcaption>center image with all interest points</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/center_with_points_ANMS.jpeg" alt="selfie" class="q1_image">
+                <figcaption>center image interest points after ANMS</figcaption>
+            </figure>
+        </div>
+
+        <h3>B.2: Feature Descriptor Extraction</h3>
+        <h4>Center Image Feature Descriptors</h4>
+        <div class="grid_3">
+            <figure>
+                <img src="./partB/pan1/features/center/feature0.jpg" alt="selfie" class="q1_image">
+                <figcaption>Feature 1</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/features/center/feature1.jpg" alt="selfie" class="q1_image">
+                <figcaption>Feature 2</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/features/center/feature2.jpg" alt="selfie" class="q1_image">
+                <figcaption>Feature 3</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/features/center/feature4.jpg" alt="selfie" class="q1_image">
+                <figcaption>Feature 4</figcaption>
+            </figure>
+        </div>
+        <h4>Side Image Feature Descriptors</h4>
+        <div class="grid_3">
+            <figure>
+                <img src="./partB/pan1/features/side/feature0.jpg" alt="selfie" class="q1_image">
+                <figcaption>Feature 1</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/features/side/feature1.jpg" alt="selfie" class="q1_image">
+                <figcaption>Feature 2</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/features/side/feature2.jpg" alt="selfie" class="q1_image">
+                <figcaption>Feature 3</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/features/side/feature4.jpg" alt="selfie" class="q1_image">
+                <figcaption>Feature 4</figcaption>
+            </figure>
+        </div>
+        <h4>B.3: Feature Matching</h4>
+        <div class="grid_2">
+            <figure>
+                <img src="./partB/pan1/center_correspondence.jpeg" alt="selfie" class="q1_image">
+                <figcaption>center image correspondence</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/side_correspondence.jpeg" alt="selfie" class="q1_image">
+                <figcaption>side image correspondence</figcaption>
+            </figure>
+        </div>
+        <figure>
+            <img src="./partB/pan1/pan1_correspondences.jpg" alt="selfie" class="q1_image">
+            <figcaption>image correspondence</figcaption>
+        </figure>
+        <h4>B.4: RANSAC for Robust Homography</h4>
+        <div class="grid_2">
+            <figure>
+                <img src="./partB/pan1/pan1_raw.jpg" alt="selfie" class="q1_image">
+                <figcaption>direct overlay images</figcaption>
+            </figure>
+            <figure>
+                <img src="./part1.4/pan1_raw.jpg" alt="selfie" class="q1_image">
+                <figcaption>direct overlay images with manual correspondence</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/pan1.jpg" alt="selfie" class="q1_image">
+                <figcaption>overlay images with alpha blending</figcaption>
+            </figure>
+            <figure>
+                <img src="./part1.4/pan1.jpg" alt="selfie" class="q1_image">
+                <figcaption>overlay images with alpha blending with manual correspondence</figcaption>
+            </figure>
+        </div>
+    </div>
     </main>
     <footer class="footnote">
         <div>© 2025 Jim Jiang</div>

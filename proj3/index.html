@@ -1126,6 +1126,9 @@ target coordinate:
         </div>
 
         <h3>B.2: Feature Descriptor Extraction</h3>
+        <p>For each interst points, take 40 by 40 patch around that interst point. Then gaussian blur the patch.
+            Finally we sample a 8 × 8 patch of pixels around the sub-pixel location of the interest point, using a spacing of s =5 pixels.
+        </p>
         <h4>Center Image Feature Descriptors</h4>
         <div class="grid_3">
             <figure>
@@ -1164,7 +1167,11 @@ target coordinate:
                 <figcaption>Feature 4</figcaption>
             </figure>
         </div>
-        <h4>B.3: Feature Matching</h4>
+        <h3>B.3: Feature Matching</h3>
+        <h4>Feature-Space Outlier Rejection</h4>
+        <p>1-NN: L2 of the closest match</p>
+        <p>2-NN: L2 of the second-closest match</p>
+        <p>if 1-NN/2-NN > threshold: keep the correspondence (interest pt, 1-NN)</p>
         <div class="grid_2">
             <figure>
                 <img src="./partB/pan1/center_correspondence.jpeg" alt="selfie" class="q1_image">
@@ -1180,6 +1187,21 @@ target coordinate:
             <figcaption>image correspondence</figcaption>
         </figure>
         <h4>B.4: RANSAC for Robust Homography</h4>
+        <code><pre>
+best_T=None 
+best_inlier_count=0 
+for iteration in range(N): 
+    sample=randomly_sample_4_correspondences(all_correspondences)
+    #Fitmodeltosample 
+    T=get_T(sample) 
+    #Count inliers using the fitted model 
+    inlier_count=count_inliers(T,all_correspondences,threshold) 
+    #Keepbestmodel 
+    if inlier_count>best_inlier_count: 
+    best_inlier_count=inlier_count 
+    best_T=T 
+return best_T
+        </pre></code>
         <div class="grid_2">
             <figure>
                 <img src="./partB/pan1/pan1_raw.jpg" alt="selfie" class="q1_image">
@@ -1198,6 +1220,66 @@ target coordinate:
                 <figcaption>overlay images with alpha blending with manual correspondence</figcaption>
             </figure>
         </div>
+        <h3>Other autostiching mosaic</h3>
+        <div class="grid_2">
+            <figure>
+                <img src="./partB/pan2/pan2_raw.jpg" alt="selfie" class="q1_image">
+                <figcaption>direct overlay images</figcaption>
+            </figure>
+            <figure>
+                <img src="./part1.4/pan2_raw.jpg" alt="selfie" class="q1_image">
+                <figcaption>direct overlay images with manual correspondence</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan2/pan2.jpg" alt="selfie" class="q1_image">
+                <figcaption>overlay images with alpha blending</figcaption>
+            </figure>
+            <figure>
+                <img src="./part1.4/pan2.jpg" alt="selfie" class="q1_image">
+                <figcaption>overlay images with alpha blending with manual correspondence</figcaption>
+            </figure>
+        </div>
+        <div class="grid_2">
+            <figure>
+                <img src="./partB/pan3/pan3_raw.jpg" alt="selfie" class="q1_image">
+                <figcaption>direct overlay images</figcaption>
+            </figure>
+            <figure>
+                <img src="./part1.4/pan3_raw.jpg" alt="selfie" class="q1_image">
+                <figcaption>direct overlay images with manual correspondence</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan3/pan3.jpg" alt="selfie" class="q1_image">
+                <figcaption>overlay images with alpha blending</figcaption>
+            </figure>
+            <figure>
+                <img src="./part1.4/pan3.jpg" alt="selfie" class="q1_image">
+                <figcaption>overlay images with alpha blending with manual correspondence</figcaption>
+            </figure>
+        </div>
+        <div class="grid_2">
+            <figure>
+                <img src="./partB/pan4/pan4_raw.jpg" alt="selfie" class="q1_image">
+                <figcaption>direct overlay images</figcaption>
+            </figure>
+            <figure>
+                <img src="./part1.4/pan4_raw.jpg" alt="selfie" class="q1_image">
+                <figcaption>direct overlay images with manual correspondence</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan4/pan4.jpg" alt="selfie" class="q1_image">
+                <figcaption>overlay images with alpha blending</figcaption>
+            </figure>
+            <figure>
+                <img src="./part1.4/pan4.jpg" alt="selfie" class="q1_image">
+                <figcaption>overlay images with alpha blending with manual correspondence</figcaption>
+            </figure>
+        </div>
+        <h3>Conclusion</h3>
+        <p>By comparing mosaic constructed using manual selected correspondence versus mosaic constructed using autostiching.
+            We can see they can achieve similar effect after blending to reduce boundary effect. 
+            autostiching usually can't produce exact same moasic as manual correspondence. 
+        </p>
     </div>
     </main>
     <footer class="footnote">

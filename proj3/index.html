@@ -1112,7 +1112,7 @@ target coordinate:
             <figcaption>minimum suppression radius formula for point x_i</figcaption>
         </figure>
         <p>We use a value crobust = 0.9, which ensures that a neighbour must have significantly higher strength for suppression to take place.
-             We select the nip = 500interest points with the largest values of r_i.</p>
+             We select the n_ip = 500 interest points with the largest values of r_i.</p>
 
         <div class="grid_2">
             <figure>
@@ -1123,11 +1123,21 @@ target coordinate:
                 <img src="./partB/pan1/center_with_points_ANMS.jpeg" alt="selfie" class="q1_image">
                 <figcaption>center image interest points after ANMS</figcaption>
             </figure>
+            <figure>
+                <img src="./partB/pan1/side_with_points.jpeg" alt="selfie" class="q1_image">
+                <figcaption>side image with all interest points</figcaption>
+            </figure>
+            <figure>
+                <img src="./partB/pan1/side_with_points_ANMS.jpeg" alt="selfie" class="q1_image">
+                <figcaption>side image interest points after ANMS</figcaption>
+            </figure>
         </div>
+        <p>we can see after ANMS we drastically reduce number of features in the image but features are much still well distributed across the image</p>
 
         <h3>B.2: Feature Descriptor Extraction</h3>
         <p>For each interst points, take 40 by 40 patch around that interst point. Then gaussian blur the patch.
             Finally we sample a 8 × 8 patch of pixels around the sub-pixel location of the interest point, using a spacing of s =5 pixels.
+            Also bias/gain-normalize each descriptor.
         </p>
         <h4>Center Image Feature Descriptors</h4>
         <div class="grid_3">
@@ -1172,6 +1182,7 @@ target coordinate:
         <p>1-NN: L2 of the closest match</p>
         <p>2-NN: L2 of the second-closest match</p>
         <p>if 1-NN/2-NN > threshold: keep the correspondence (interest pt, 1-NN)</p>
+        <p>here I use threshold = 0.3</p>
         <div class="grid_2">
             <figure>
                 <img src="./partB/pan1/center_correspondence.jpeg" alt="selfie" class="q1_image">

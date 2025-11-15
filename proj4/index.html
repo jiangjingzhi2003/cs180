@@ -152,11 +152,13 @@ criterion = torch.nn.MSELoss()
                     <figcaption>PE layers=20, width=(256,256)</figcaption>
                 </figure>
             </div>
-            <p>Comparing the four different outputs, we can see the width of MLP determine if MLP can actually learn enough information about general shape of the image
-                Then max positional encoding layers.
-                If width of the channel low like (2,2), the model can't learn the image at all.
-                If L max position encoding layer is low, model can't extract that many details from the image.
-            </p>
+            <div class="description">
+                <p>Comparing the four different outputs, we can see the width of MLP determine if MLP can actually learn enough information about general shape of the image
+                    Then max positional encoding layers.
+                    If width of the channel low like (2,2), the model can't learn the image at all.
+                    If L max position encoding layer is low, model can't extract that many details from the image.
+                </p>
+            </div>
         </div>
         <div class="Q2">
             <div class="description">

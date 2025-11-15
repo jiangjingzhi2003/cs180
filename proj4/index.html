@@ -41,6 +41,7 @@
                     <img src="./part0/frustums_2.jpeg" alt="selfie" class="q1_image">
                 </figure>
             </div>
+            <p>Note: I didn't do image undistort because I feel my camera didn't cause too much distoriton and won't affect training</p>
         </div>
         <div class="Q1">
             <div class="description">
@@ -150,7 +151,9 @@ criterion = torch.nn.MSELoss()
                 </figure>
             </div>
             <p>Comparing the four different outputs, we can see the width of MLP determine if MLP can actually learn enough information about general shape of the image
-                Then max positional encoding layers
+                Then max positional encoding layers.
+                If width of the channel low like (2,2), the model can't learn the image at all.
+                If L max position encoding layer is low, model can't extract that many details from the image.
             </p>
         </div>
         <div class="Q2">

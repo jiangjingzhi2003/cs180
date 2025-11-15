@@ -149,6 +149,9 @@ criterion = torch.nn.MSELoss()
                     <figcaption>PE layers=20, width=(256,256)</figcaption>
                 </figure>
             </div>
+            <p>Comparing the four different outputs, we can see the width of MLP determine if MLP can actually learn enough information about general shape of the image
+                Then max positional encoding layers
+            </p>
         </div>
         <div class="Q2">
             <div class="description">
@@ -216,6 +219,17 @@ criterion = torch.nn.MSELoss()
                     output two things: density and rgb color for corresponding input.
                     I implement using pytorch.
                     I implement position encoding function in pytorch using this formula.
+                </p>
+                <p>
+                    To improve modeling training, I tried to normalize the sampled point input by do the following
+                    <code><pre>
+                        rays_o, rays_d, pixels = dataset.sample_rays(20000, M=len(images_train))
+                        points, _ = sample_along_rays(rays_o, rays_d, n=64, near=near, far=far, perturb=True)
+                        bbox_min, bbox_max = get_boundingbox(points)
+                        points_norm = points_normalization(points, bbox_min, bbox_max)
+                    </pre></code>
+                    I will sample 20000 points and try to use them to estimate the bouding box the space that contain desire image,
+                    then I normalize all points coord using bounding box.
                 </p>
                 <div class="grid_4">
                     <figure>
@@ -298,6 +312,7 @@ near, far = 0.02, 0.5
                     2. I chose near, far = 0.02, 0.5 because my object is around 15 cm away from my camera
                     3. I keep same PE layers since it captured enough details and don't explode my GPU
                 </p>
+                <p>I didin't change too much code</p>
             </div>
             <div class="grid_3">
                 <figure>

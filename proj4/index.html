@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="../main_style.css">
+    <link rel="stylesheet" href="./proj4_style.css">
+</head>
+<body>
+    <header>
+        <h1 class="centered">Project 3</h1>
+        <nav class="navbar">
+            <a href="../index.html">Home</a>
+            <a href="../index.html">Projects</a>
+        </nav>
+    </header>
+    <main>
+        <div class="Q0">
+            <div class="description">
+                <h2>Part 0: Calibrating Your Camera and Capturing a 3D Scan</h2>
+                <h3>Some original cpatured images</h3>
+            </div>
+            <div class="grid_3">
+                <figure>
+                    <img src="./part0/IMG_3563.jpeg" alt="selfie" class="q1_image">
+                </figure>
+                <figure>
+                    <img src="./part0/IMG_3564.jpeg" alt="selfie" class="q1_image">
+                </figure>
+                <figure>
+                    <img src="./part0/IMG_3565.jpeg" alt="selfie" class="q1_image">
+                </figure>
+            </div>
+            <div class="description">
+                <h3>Images in Viser</h3>
+            </div>
+            <div class="grid_2">
+                <figure>
+                    <img src="./part0/frustums_1.jpeg" alt="selfie" class="q1_image">
+                </figure>
+                <figure>
+                    <img src="./part0/frustums_2.jpeg" alt="selfie" class="q1_image">
+                </figure>
+            </div>
+        </div>
+        <div class="Q1">
+            <div class="description">
+                <h2>Part 1: Fit a Neural Field to a 2D Image</h2>
+                <h3>Model Archtecture</h3>
+                <pre><code>
+mlp = nn.Sequential(
+    nn.Linear(82, 256),
+    nn.ReLU(),
+    nn.Linear(256, 256),
+    nn.ReLU(),
+    nn.Linear(256, 3),
+    nn.Sigmoid()
+)
+lr = 1e-2
+num_epochs = 3000
+batch_size = 10000
+optimizer = torch.optim.Adam(mlp.parameters(), lr=1e-2)
+criterion = torch.nn.MSELoss()
+                </code></pre>
+            </div>
+            <div class="grid_3">
+                <figure>
+                    <img src="./part1/fox_1.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 0</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/fox_2.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 50</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/fox_3.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 100</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/fox_4.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 500</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/fox_5.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 1000</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/fox_6.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 2000</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/fox_7.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 2999</figcaption>
+                </figure>
+            </div>
+            <div class="grid_2">
+                <figure>
+                    <img src="./part1/fox_PSNR.png" alt="selfie" class="q1_image">
+                </figure>
+            </div>
+            <div class="grid_3">
+                <figure>
+                    <img src="./part1/pet/pet1.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 0</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/pet/pet2.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 50</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/pet/pet3.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 100</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/pet/pet4.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 500</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/pet/pet5.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 1000</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/pet/pet6.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 2000</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/pet/pet7.png" alt="selfie" class="q1_image">
+                    <figcaption>iter = 2999</figcaption>
+                </figure>
+            </div>
+            <div class="description">
+                <h3>Hyperparameter Comparision</h3>
+                <h4>After training for 2000 iterations</h4>
+            </div>
+            <div class="grid_4">
+                <figure>
+                    <img src="./part1/grid/fox_mlp_5_lowpe.jpg" alt="selfie" class="q1_image">
+                    <figcaption>PE layers=2, width=(2,2)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/grid/fox_mlp_5_lowpe_goodnet.jpg" alt="selfie" class="q1_image">
+                    <figcaption>PE layers=2, width=(256,256)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/grid/fox_mlp_5_narrow.jpg" alt="selfie" class="q1_image">
+                    <figcaption>PE layers=20, width=(2,2)</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part1/grid/fox_6.png" alt="selfie" class="q1_image">
+                    <figcaption>PE layers=20, width=(256,256)</figcaption>
+                </figure>
+            </div>
+        </div>
+        <div class="Q2">
+            <div class="description">
+                <h2>Part 2: Fit a Neural Radiance Field from Multi-view Images</h2>
+            </div>
+            <div class="Q2.1">
+                <div class="description">
+                    <h3>Part 2.1: Create Rays from Cameras</h3>
+                    <p>Frist implement a function x_w = transform(c2w, x_c) using following formula</p>
+                    <img src="./part2/tranform_formula.png" alt="selfie" class="q1_image">
+                    <p>Then implement a function x_c = pixel_to_camera(K, uv, s) which transform 2d image coord to camera coord</p>
+                    <p>I first inverse K, then use formula <code>s * K_inv @ uv.T</code> to calculate camera coord</p>
+                    <p>Then implement function ray_o, ray_d = pixel_to_ray(K, c2w, uv)</p>
+                    <p>I first use pixel_to_camera(K, uv, s) to convert uv into camera coordinate with s =1 then I use 
+                        transform(c2w, x_c) to convert uv into world coordinate, then I use following formula to normalize the ray 
+                        direction.
+                    </p>
+                    <img src="./part2/normalize.png" alt="selfie" class="q1_image">
+                </div>
+            </div>
+            <div class="Q2.2">
+                <div class="description">
+                    <h3>Part 2.2: Sampling</h3>
+                    <h4>Sampling Rays from Images</h4>
+                    <p>First I need to sample rays from images data, I created an class call RaysData
+                        with following attribute:
+                        <code><pre>
+    def __init__(self, images, K, c2ws, full_control = False):
+            self.images = images # all images captured
+            self.K = K # camera matrix
+            self.c2ws = c2ws # camera to world matrix
+            self.uvs = None # all coordinates
+            self.pixels = None # all pixel values
+            self.rays_o = None # all ray origin
+            self.rays_d = None # all ray direction
+                        </pre></code>
+                        in here full control mean I will generate all possible rays from all images, 
+                        this is for full image rendering
+                    </p>
+                    <p>To implement full control, I iterate over all images to generate all possible coordinate for each images then
+                        I generate matching rays from each coordinates using functions pixel_to_ray(K, c2w, uv)
+                        and store matching pixle values
+                    </p>
+                    <p>To implement ray sampling, I create function def sample_rays(self, N, M=100)
+                        N: total ray want sampled, M: number of images to sample ray from
+                    </p>
+                    <p>
+                        I calculate N//M to get number ray in each sampled images. 
+                        I fisrt sample M images then sample N//M rays from each selected images
+                    </p>
+                    <h4>Implement Sampling Points along Rays</h4>
+                    <code>def sample_along_rays(r_os, r_ds, n=32, near=2.0, far=6.0, perturb=True, random=True):</code>
+                    <p>I uniformly create some samples along the ray (t = np.linspace(near, far, n_samples)). 
+                        Then convert each points to actual 3D coord <code>sampled_x = r_os + r_ds * t </code>
+                        Then I introduce some small perturbation to the points t = t + (np.random.rand(*t.shape) * t_width)
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="Q2.4">
+            <div class="description">
+                <h3>Part 2.4: Neural Radiance Field</h3>
+                <p>I implement my NeRF MLP base on following structure. 
+                    MLP takes in two input: position encoding of 3D coord for a points and position encoding of 3D direction for ray
+                    output two things: density and rgb color for corresponding input.
+                    I implement using pytorch.
+                    I implement position encoding function in pytorch using this formula.
+                </p>
+                <div class="grid_4">
+                    <figure>
+                        <img src="./part2/CNN.png" alt="selfie" class="q1_image">
+                    </figure>
+                    <figure>
+                        <img src="./part2/PE_formula.png" alt="selfie" class="q1_image">
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="Q2.5">
+            <div class="description">
+                <h3>Part 2.5: Volume Rendering</h3>
+                <p>Using following formula, I can calculate actual pixel value from NeRF MLP's output.
+                    I built function <code>def volrend(sigmas, rgbs, step_size):</code>
+                </p>
+                <div class="grid_4">
+                    <figure>
+                        <img src="./part2/volren_formula.png" alt="selfie" class="q1_image">
+                    </figure>
+                </div>
+                <h3>Lego Example</h3>
+            </div>
+            <div class="description">
+                <h3>Sampling Rays and Points during iter=100</h3>
+            </div>
+            <div class="grid_2">
+                <figure>
+                    <img src="./part2/lego_ray_samples.jpeg" alt="selfie" class="q1_image">
+                </figure>
+            </div>
+            <div class="grid_3">
+                <figure>
+                    <img src="./part2/lego_train_img/lego_0.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 0</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/lego_train_img/lego_50.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 50</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/lego_train_img/lego_100.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 100</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/lego_train_img/lego_500.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 500</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/lego_train_img/lego_999.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 999</figcaption>
+                </figure>
+            </div>
+            <div class="grid_2">
+                <figure>
+                    <img src="./part2/lego_PSNRs.png" alt="selfie" class="q1_image">
+                    <figcaption>Final PSNR = 23.28959</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/lego_orbit.gif" alt="selfie" class="q1_image">
+                </figure>
+            </div>
+        </div>
+        <div class="Q2.6">
+            <div class="description">
+                <h3>Part 2.6: Training with Your Own Data</h3>
+                <p>I used the same MLP construction showed above, and here is the Hyperparameter</p>
+                <code><pre>
+batch_size = 10000
+num_epochs = 3000
+coord_pe_layers = 10
+ray_pe_layers = 4
+near, far = 0.02, 0.5
+                </pre></code>
+                <p>
+                    Explaination: 
+                    1. I trained longer epochs to let MLP actually detect my obejct, my object is relatively small.
+                    2. I chose near, far = 0.02, 0.5 because my object is around 15 cm away from my camera
+                    3. I keep same PE layers since it captured enough details and don't explode my GPU
+                </p>
+            </div>
+            <div class="grid_3">
+                <figure>
+                    <img src="./part2/pokemon_rgb/pokemon_0.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 0</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/pokemon_rgb/pokemon_50.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 50</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/pokemon_rgb/pokemon_100.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 100</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/pokemon_rgb/pokemon_500.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 500</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/pokemon_rgb/pokemon_1000.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 1000</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/pokemon_rgb/pokemon_2000.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 2000</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/pokemon_rgb/pokemon_2999.jpg" alt="selfie" class="q1_image">
+                    <figcaption>iter = 2999</figcaption>
+                </figure>
+            </div>
+            <div class="grid_2">
+                <figure>
+                    <img src="./part2/training losses.png" alt="selfie" class="q1_image">
+                    <figcaption>Final PSNR = 23.28959</figcaption>
+                </figure>
+                <figure>
+                    <img src="./part2/orbit.gif" alt="selfie" class="q1_image">
+                </figure>
+            </div>
+        </div>
+    </main>
+</body>

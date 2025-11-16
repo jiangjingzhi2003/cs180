@@ -55,6 +55,8 @@ mlp = nn.Sequential(
     nn.ReLU(),
     nn.Linear(256, 256),
     nn.ReLU(),
+    nn.Linear(256, 256),
+    nn.ReLU(),
     nn.Linear(256, 3),
     nn.Sigmoid()
 )
@@ -63,71 +65,77 @@ num_epochs = 3000
 batch_size = 10000
 optimizer = torch.optim.Adam(mlp.parameters(), lr=1e-2)
 criterion = torch.nn.MSELoss()
+L = 20
                 </code></pre>
             </div>
             <div class="grid_3">
                 <figure>
-                    <img src="./part1/fox_1.png" alt="selfie" class="q1_image">
+                    <img src="./part1/fox/fox_mlp_0.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 0</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/fox_2.png" alt="selfie" class="q1_image">
+                    <img src="./part1/fox/fox_mlp_1.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 50</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/fox_3.png" alt="selfie" class="q1_image">
+                    <img src="./part1/fox/fox_mlp_2.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 100</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/fox_4.png" alt="selfie" class="q1_image">
+                    <img src="./part1/fox/fox_mlp_3.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 500</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/fox_5.png" alt="selfie" class="q1_image">
+                    <img src="./part1/fox/fox_mlp_4.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 1000</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/fox_6.png" alt="selfie" class="q1_image">
+                    <img src="./part1/fox/fox_mlp_5.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 2000</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/fox_7.png" alt="selfie" class="q1_image">
+                    <img src="./part1/fox/fox_mlp_6.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 2999</figcaption>
                 </figure>
             </div>
             <div class="grid_2">
                 <figure>
-                    <img src="./part1/fox_PSNR.png" alt="selfie" class="q1_image">
+                    <img src="./part1/fox/fox_PSNRs.png" alt="selfie" class="q1_image">
                 </figure>
             </div>
             <div class="grid_3">
                 <figure>
-                    <img src="./part1/pet/pet1.png" alt="selfie" class="q1_image">
+                    <img src="./part1/dog/pet_mlp_0.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 0</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/pet/pet2.png" alt="selfie" class="q1_image">
+                    <img src="./part1/dog/pet_mlp_1.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 50</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/pet/pet3.png" alt="selfie" class="q1_image">
+                    <img src="./part1/dog/pet_mlp_2.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 100</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/pet/pet4.png" alt="selfie" class="q1_image">
+                    <img src="./part1/dog/pet_mlp_3.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 500</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/pet/pet5.png" alt="selfie" class="q1_image">
+                    <img src="./part1/dog/pet_mlp_4.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 1000</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/pet/pet6.png" alt="selfie" class="q1_image">
+                    <img src="./part1/dog/pet_mlp_5.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 2000</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/pet/pet7.png" alt="selfie" class="q1_image">
+                    <img src="./part1/dog/pet_mlp_6.jpg" alt="selfie" class="q1_image">
                     <figcaption>iter = 2999</figcaption>
+                </figure>
+            </div>
+            <div class="grid_2">
+                <figure>
+                    <img src="./part1/dog/dog_PSNRs.png" alt="selfie" class="q1_image">
                 </figure>
             </div>
             <div class="description">
@@ -148,15 +156,17 @@ criterion = torch.nn.MSELoss()
                     <figcaption>PE layers=20, width=(2,2)</figcaption>
                 </figure>
                 <figure>
-                    <img src="./part1/grid/fox_6.png" alt="selfie" class="q1_image">
+                    <img src="./part1/grid/fox_mlp_5.jpg" alt="selfie" class="q1_image">
                     <figcaption>PE layers=20, width=(256,256)</figcaption>
                 </figure>
             </div>
             <div class="description">
-                <p>Comparing the four different outputs, we can see the width of MLP determine if MLP can actually learn enough information about general shape of the image
-                    Then max positional encoding layers.
-                    If width of the channel low like (2,2), the model can't learn the image at all.
+                <p>Comparing the four different outputs, we can see the width of MLP determine if MLP can actually learn enough information about general color in each area.
+                    Then max positional encoding layers determine how many different frequence the model can learn.
+                    If width of the channel low like (2,2), the model can't learn actaul color distribution which cause it only depict general fox area with uniform color.
+                    High L and low channle width, just let model learn some sharp edge of the fox.
                     If L max position encoding layer is low, model can't extract that many details from the image.
+                    That's why L =2 with big channel width produce image with big color chunks no detail texture.
                 </p>
             </div>
         </div>

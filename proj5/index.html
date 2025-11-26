@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="../main_style.css">
+    <link rel="stylesheet" href="./proj5_style.css">
+</head>
+<body>
+    <header>
+        <h1 class="centered">Project 5</h1>
+        <nav class="navbar">
+            <a href="../index.html">Home</a>
+            <a href="../index.html">Projects</a>
+        </nav>
+    </header>
+    <main>
+        <div class="partA">
+            <div class="part0">
+                <div class="description">
+                    <h2>Part 0: Setup</h2>
+                    <p>prompts = ['a photo of a puppy',
+                            'a photo of a cat',
+                            'a photo of dog fighting a cat']
+                    </p>
+                    <p>seed = 100</p>
+                </div>
+                <div class="description">
+                    <h3>num_inference_steps = 6</h3>
+                </div>
+                <div class="grid_3">
+                    <figure>
+                        <img src="./part0/6/dog.png" alt="selfie" class="q1_image">
+                        <figcaption>a photo of a puppy</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./part0/6/cat.png" alt="selfie" class="q1_image">
+                        <figcaption>a photo of a cat</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./part0/6/cat_dog.png" alt="selfie" class="q1_image">
+                        <figcaption>a photo of dog fighting a cat</figcaption>
+                    </figure>
+                </div>
+                <div class="description">
+                    <h3>num_inference_steps = 20</h3>
+                </div>
+                <div class="grid_3">
+                    <figure>
+                        <img src="./part0/dog.png" alt="selfie" class="q1_image">
+                        <figcaption>a photo of a puppy</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./part0/cat.png" alt="selfie" class="q1_image">
+                        <figcaption>a photo of a cat</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="./part0/cat_dog.png" alt="selfie" class="q1_image">
+                        <figcaption>a photo of dog fighting a cat</figcaption>
+                    </figure>
+                </div>
+                <div class="description">
+                    <p>By comparing two inference steps: we can see longer inference step can produc image with more colors and details, 
+                        we can see that by comparing the two cat image, num_inference_steps=6 produces really blur cat image while num_inference_steps=20 produce fine-detailed cat
+                        It takes longer to generate correct picture for complicated prompts like a photo of dog fighting a cat. 
+                        With num_inference_steps=6, there is almost no signs of fighting and with num_inference_steps=20, we can the see the fighting but it is not a dog and a cat fighting.
+                    </p>
+                </div>
+            </div>
+            <div class="part1">
+                <div class="description">
+                    <h2>Part 1: Sampling Loops</h2>
+                </div>
+                <div class="part1.1">
+                    <div class="description">
+                        <h3>1.1 Implementing the Forward Process</h3>
+                        <img src="./part1/Q1/formula1.jpeg" alt="selfie" class="q1_image">
+                        <p>Using above formula, I implemented noisy_im = forward(im, t) function</p>
+                    </div>
+                    <div class="grid_3">
+                        <figure>
+                            <img src="./part1/Q1/campnile.png" alt="selfie" class="q1_image">
+                            <figcaption>Berkeley Campanile</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q1/noisy_img_250 (1).png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=250</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q1/noisy_img_500.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=500</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q1/noisy_img_750.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=750</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.2">
+                    <div class="description">
+                        <h3>1.2 Classical Denoising</h3>
+                    </div>
+                    <div class="grid_4">
+                        <figure>
+                            <img src="./part1/Q1/noisy_img_250 (1).png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=250</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q1/noisy_img_500.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=500</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q1/noisy_img_750.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=750</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q2/blur_img_250.png" alt="selfie" class="q1_image">
+                            <figcaption>Gaussian Blur Denoising at t=250, kernel size=15</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q2/blur_img_500.png" alt="selfie" class="q1_image">
+                            <figcaption>Gaussian Blur Denoising at t=500, kernel size=25</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q2/blur_img_750.png" alt="selfie" class="q1_image">
+                            <figcaption>Gaussian Blur Denoising at t=750, kernel size=35</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.3">
+                    <div class="description">
+                        <h3>1.3 One-Step Denoising</h3>
+                    </div>
+                    <div class="grid_4">
+                        <figure>
+                            <img src="./part1/Q1/noisy_img_250 (1).png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=250</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q1/noisy_img_500.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=500</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q1/noisy_img_750.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=750</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q3/recovered_250.png" alt="selfie" class="q1_image">
+                            <figcaption>One-Step Denoised Campanile at t=250</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q3/recovered_500.png" alt="selfie" class="q1_image">
+                            <figcaption>One-Step Denoised Campanile at t=500</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q3/recovered_750.png" alt="selfie" class="q1_image">
+                            <figcaption>One-Step Denoised Campanile at t=750</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.4">
+                    <div class="description">
+                        <h3>1.4 Iterative Denoising</h3>
+                    </div>
+                    <div class="grid_3">
+                        <figure>
+                            <img src="./part1/Q4/iter_90.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=90</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q4/iter_240.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=240</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q4/iter_390.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=390</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q4/iter_540.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=540</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q4/iter_690.png" alt="selfie" class="q1_image">
+                            <figcaption>Noisy Campanile at t=690</figcaption>
+                        </figure>
+                    </div>
+                    <div class="grid_3">
+                        <figure>
+                            <img src="./part1/Q1/campnile.png" alt="selfie" class="q1_image">
+                            <figcaption>Original image</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q4/clean.png" alt="selfie" class="q1_image">
+                            <figcaption>Iteratively Denoised Campanile</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q4/clean_one_step.png" alt="selfie" class="q1_image">
+                            <figcaption>One Step Denoised Campanile</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q4/blur_filtered.png" alt="selfie" class="q1_image">
+                            <figcaption>Gaussian Blurred Campanile</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.5">
+                    <div class="description">
+                        <h3>1.5 Diffusion Model Sampling</h3>
+                    </div>
+                    <div class="grid_3">
+                        <figure>
+                            <img src="./part1/Q5/sample_0.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q5/sample_1.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q5/sample_2.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q5/sample_3.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q5/sample_4.png" alt="selfie" class="q1_image">
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.6">
+                    <div class="description">
+                        <h3>1.6 Classifier-Free Guidance (CFG)</h3>
+                    </div>
+                    <div class="grid_3">
+                        <figure>
+                            <img src="./part1/Q6/sample_0.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q6/sample_1.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q6/sample_2.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q6/sample_3.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q6/sample_4.png" alt="selfie" class="q1_image">
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.7">
+                    <div class="description">
+                        <h3>1.7 Image-to-image Translation</h3>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./part1/Q7/clean_1.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 1</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/clean_3.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 3</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/clean_5.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 5</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/clean_7.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 7</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/clean_10.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 10</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/clean_20.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 20</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q1/campnile.png" alt="selfie" class="q1_image">
+                            <figcaption>Original Image</figcaption>
+                        </figure>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./part1/Q7/lincoln_1.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 1</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/lincoln_3.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 3</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/lincoln_5.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 5</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/lincoln_7.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 7</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/lincoln_10.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 10</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/lincoln_20.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 20</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/lincoln.jpeg" alt="selfie" class="q1_image">
+                            <figcaption>Original Image</figcaption>
+                        </figure>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./part1/Q7/beach_1.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 1</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/beach_3.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 3</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/beach_5.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 5</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/beach_7.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 7</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/beach_10.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 10</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/beach_20.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 20</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7/beach.JPG" alt="selfie" class="q1_image">
+                            <figcaption>Original Image</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.7.1">
+                    <div class="description">
+                        <h3>1.7.1 Editing Hand-Drawn and Web Images</h3>
+                        <h4>Web Image</h4>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./part1/Q7.1/web/web_1.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 1</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/web/web_3.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 3</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/web/web_5.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 5</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/web/web_7.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 7</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/web/web_10.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 10</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/web/web_20.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 20</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/web/car.png" alt="selfie" class="q1_image">
+                            <figcaption>Original Image</figcaption>
+                        </figure>
+                    </div>
+                    <div class="description">
+                        <h4>Hand-Drawn</h4>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/tree_1.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 1</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/tree_3.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 3</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/tree_5.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 5</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/tree_7.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 7</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/tree_10.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 10</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/tree_20.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 20</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/myImage.png" alt="selfie" class="q1_image">
+                            <figcaption>Original Image</figcaption>
+                        </figure>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/house_1.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 1</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/house_3.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 3</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/house_5.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 5</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/house_7.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 7</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/house_10.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 10</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/house_20.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 20</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.1/hand_draw/myImage_2.png" alt="selfie" class="q1_image">
+                            <figcaption>Original Image</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.7.2">
+                    <div class="description">
+                        <h3>1.7.2 Inpainting</h3>
+                    </div>
+                    <div class="grid_3">
+                        <figure>
+                            <img src="./part1/Q7.2/campnilie_original.png" alt="selfie" class="q1_image">
+                            <figcaption>Original image</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.2/campnilie_mask.png" alt="selfie" class="q1_image">
+                            <figcaption>Mask</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.2/inpaint_campnile.png" alt="selfie" class="q1_image">
+                            <figcaption>Inpainted</figcaption>
+                        </figure>
+                    </div>
+                    <div class="grid_3">
+                        <figure>
+                            <img src="./part1/Q7.2/beach_original.png" alt="selfie" class="q1_image">
+                            <figcaption>Original image</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.2/beach_mask.png" alt="selfie" class="q1_image">
+                            <figcaption>Mask</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.2/inpaint_beach.png" alt="selfie" class="q1_image">
+                            <figcaption>Inpainted</figcaption>
+                        </figure>
+                    </div>
+                    <div class="grid_3">
+                        <figure>
+                            <img src="./part1/Q7.2/shanghai_original.png" alt="selfie" class="q1_image">
+                            <figcaption>Original image</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.2/shanghai_mask.png" alt="selfie" class="q1_image">
+                            <figcaption>Mask</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.2/inpaint_shanghai.png" alt="selfie" class="q1_image">
+                            <figcaption>Inpainted</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.7.3">
+                    <div class="description">
+                        <h3>1.7.3 Text-Conditional Image-to-image Translation</h3>
+                    </div>
+                    <div class="description">
+                        <h5>Prompt = a rocket ship</h5>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./part1/Q7.3/rocket_campanile_1.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 1</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/rocket_campanile_3.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 3</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/rocket_campanile_5.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 5</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/rocket_campanile_7.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 7</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/rocket_campanile_10.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 10</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/rocket_campanile_20.png" alt="selfie" class="q1_image">
+                            <figcaption>iter = 20</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q1/campnile.png" alt="selfie" class="q1_image">
+                            <figcaption>Original Image</figcaption>
+                        </figure>
+                    </div>
+                    <div class="description">
+                        <h5>Prompt = a photo of mountains</h5>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./part1/Q7.3/mountain_beach1.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 1</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/mountain_beach3.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 3</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/mountain_beach5.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 5</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/mountain_beach7.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 7</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/mountain_beach10.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 10</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/mountain_beach20.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 20</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.2/beach.JPG" alt="selfie" class="q1_image">
+                            <figcaption>Original Image</figcaption>
+                        </figure>
+                    </div>
+                    <div class="description">
+                        <h5>Prompt = a photo of New York</h5>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./part1/Q7.3/NY_shanghai1.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 1</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/NY_shanghai3.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 3</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/NY_shanghai5.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 5</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/NY_shanghai7.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 7</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/NY_shanghai10.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 10</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.3/NY_shanghai20.png" alt="selfie" class="q1_image">
+                            <figcaption>i_start = 20</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q7.2/shanghai.JPG" alt="selfie" class="q1_image">
+                            <figcaption>Original Image</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="part1.8">
+                    <div class="description">
+                        <h3>1.8 Visual Anagrams</h3>
+                    </div>
+                    <div class="grid_4">
+                        <figure>
+                            <img src="./part1/Q8/flip_illusion.png" alt="selfie" class="q1_image">
+                            <figcaption>An Oil Painting of an Old Man</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q8/flip_illusion_flip.png" alt="selfie" class="q1_image">
+                            <figcaption>An Oil Painting of People around a Campfire</figcaption>
+                        </figure>
+                    </div>
+                    <div class="grid_4">
+                        <figure>
+                            <img src="./part1/Q8/sun_village.png" alt="selfie" class="q1_image">
+                            <figcaption>a painting of sunflowers</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q8/sun_village copy.png" alt="selfie" class="q1_image">
+                            <figcaption>a painting of village</figcaption>
+                        </figure>
+                    </div>
+                    <div class="grid_4">
+                        <figure>
+                            <img src="./part1/Q8/oldman_snowyvillage.png" alt="selfie" class="q1_image">
+                            <figcaption>an oil painting of a snowy mountain village</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./part1/Q8/oldman_snowyvillage_flip.png" alt="selfie" class="q1_image">
+                            <figcaption>An Oil Painting of an Old Man</figcaption>
+                        </figure>
+                    </div>
+                    <div class="part1.9">
+                        <div class="description">
+                            <h3>1.9 Hybrid Images</h3>
+                        </div>
+                        <div class="grid_4">
+                            <figure>
+                                <img src="./part1/Q9/hybrid_cat_mount.png" alt="selfie" class="q1_image">
+                                <figcaption>Hybrid image of a cat and a mountain</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="./part1/Q9/hybrid_skull_river.png" alt="selfie" class="q1_image">
+                                <figcaption>aHybrid image of a skull and a river</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="./part1/Q9/hybrid_skull_waterfall.png" alt="selfie" class="q1_image">
+                                <figcaption>Hybrid image of a skull and a waterfalle</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="footnote">
+        <div>© 2025 Jim Jiang</div>
+    </footer>
+</body>
+</html>

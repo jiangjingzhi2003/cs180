@@ -160,6 +160,11 @@
                 <div class="part1.4">
                     <div class="description">
                         <h3>1.4 Iterative Denoising</h3>
+                        <p>On the ith denoising step we are at t = strided_timesteps[i], and want to get to t = strided_timesteps[i+1] (from more noisy to less noisy).</p>
+                        <img src="./part1/Q4/Screenshot 2025-12-01 at 10.31.37.png" alt="selfie" class="formula">
+                        <p>Using above formula we can create function 
+                            <code>def iterative_denoise(im_noisy, i_start, prompt_embeds, timesteps, display=True):</code>
+                        </p>
                     </div>
                     <div class="grid_3">
                         <figure>
@@ -227,6 +232,10 @@
                 <div class="part1.6">
                     <div class="description">
                         <h3>1.6 Classifier-Free Guidance (CFG)</h3>
+                        <img src="./part1/Q6/cfg_formula.png" alt="selfie" class="formula">
+                        <p>Use above formula combine with iterative_denoise function from Q4, we can create function
+                            <code>def iterative_denoise_cfg</code>
+                        </p>
                     </div>
                     <div class="grid_3">
                         <figure>
@@ -443,6 +452,8 @@
                 <div class="part1.7.2">
                     <div class="description">
                         <h3>1.7.2 Inpainting</h3>
+                        <img src="./part1/Q7.2/inpaint_formula.png" alt="selfie" class="formula">
+                        <p>Use above formula combine with <code>def iterative_denoise_cfg</code> to create inpaint function</p>
                     </div>
                     <div class="grid_3">
                         <figure>
@@ -497,27 +508,27 @@
                     <div class="grid_5">
                         <figure>
                             <img src="./part1/Q7.3/rocket_campanile_1.png" alt="selfie" class="q1_image">
-                            <figcaption>iter = 1</figcaption>
+                            <figcaption>i_start = 1</figcaption>
                         </figure>
                         <figure>
                             <img src="./part1/Q7.3/rocket_campanile_3.png" alt="selfie" class="q1_image">
-                            <figcaption>iter = 3</figcaption>
+                            <figcaption>i_start = 3</figcaption>
                         </figure>
                         <figure>
                             <img src="./part1/Q7.3/rocket_campanile_5.png" alt="selfie" class="q1_image">
-                            <figcaption>iter = 5</figcaption>
+                            <figcaption>i_start = 5</figcaption>
                         </figure>
                         <figure>
                             <img src="./part1/Q7.3/rocket_campanile_7.png" alt="selfie" class="q1_image">
-                            <figcaption>iter = 7</figcaption>
+                            <figcaption>i_start = 7</figcaption>
                         </figure>
                         <figure>
                             <img src="./part1/Q7.3/rocket_campanile_10.png" alt="selfie" class="q1_image">
-                            <figcaption>iter = 10</figcaption>
+                            <figcaption>i_start = 10</figcaption>
                         </figure>
                         <figure>
                             <img src="./part1/Q7.3/rocket_campanile_20.png" alt="selfie" class="q1_image">
-                            <figcaption>iter = 20</figcaption>
+                            <figcaption>i_start = 20</figcaption>
                         </figure>
                         <figure>
                             <img src="./part1/Q1/campnile.png" alt="selfie" class="q1_image">
@@ -594,6 +605,8 @@
                 <div class="part1.8">
                     <div class="description">
                         <h3>1.8 Visual Anagrams</h3>
+                        <img src="./part1/Q8/formula.png" alt="selfie" class="formula">
+                        <p>above algorithm plus <code>iterative_denoise_cfg</code> create visual_anagrams function</p>
                     </div>
                     <div class="grid_4">
                         <figure>
@@ -628,6 +641,9 @@
                     <div class="part1.9">
                         <div class="description">
                             <h3>1.9 Hybrid Images</h3>
+                            <img src="./part1/Q9/formula.png" alt="selfie" class="q9_formula">
+                            <p>above algorithm plus <code>iterative_denoise_cfg</code> create make_hybrids function</p>
+                            <p>Used Gaussian Blur to create lowpass, and subtract from lowpass to create high pass</p>
                         </div>
                         <div class="grid_4">
                             <figure>

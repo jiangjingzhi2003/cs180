@@ -60,6 +60,16 @@ figcaption {
     color: #444;
 }
 
+.formula {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+.q9_formula {
+  width: 20%;
+  height: auto;
+  border-radius: 8px;
+}
 /* pre.matrix {
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   font-size: 7px;

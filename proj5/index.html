@@ -663,6 +663,469 @@
                 </div>
             </div>
         </div>
+        <div class="partB">
+            <div class="part1">
+                <div class="description">
+                    <h3>Part 1: Training a Single-Step Denoising UNet</h3>
+                </div>
+                <div class="part1.1">
+                    <div class="description">
+                        <h4>1.1 Implementing the UNet</h4>
+                        <p>Here is the structure of simple Unet</p>
+                        <img src="./partB/part1/unconditional_arch.png" alt="selfie" class="unconditional_arch">
+                    </div>
+                </div>
+                <div class="part1.2">
+                    <div class="description">
+                        <h4>1.2 Using the UNet to Train a Denoiser</h4>
+                        <p>visualization of the noising process using sigma = [0.0,
+          0.2, 0.4, 0.5, 0.6, 0.8, 1.0]</p>
+                    </div>
+                    <div class="grid_5">
+                        <figure>
+                            <img src="./partB/part1/part1.2/sigma0.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./partB/part1/part1.2/sigma02.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./partB/part1/part1.2/sigma04.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./partB/part1/part1.2/sigma05.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./partB/part1/part1.2/sigma06.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./partB/part1/part1.2/sigma08.png" alt="selfie" class="q1_image">
+                        </figure>
+                        <figure>
+                            <img src="./partB/part1/part1.2/sigma1.png" alt="selfie" class="q1_image">
+                        </figure>
+                    </div>
+                    <div class="part1.2.1">
+                        <div class="description">
+                            <h4>1.2.1 Training</h4>
+                            <figure>
+                                <img src="./partB/part1/1.2.1/train_losses.png" alt="selfie" class="train_losses">
+                            </figure>
+                            <h3>epoch 1</h3>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_1_0.5/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_1_0.5/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_1_0.5/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_1_0.5/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_1_0.5/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h4>epoch 5</h4>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_5_0.5/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_5_0.5/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_5_0.5/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_5_0.5/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.1/saved_5_0.5/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>    
+                    </div>
+                    <div class="part1.2.2">
+                        <div class="description">
+                            <h4>1.2.2 Out-of-Distribution Testing</h4>
+                            <h7>sigma = 0</h7>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.0/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.0/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.0/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.0/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.0/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>sigma = 0.2</h7>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.2/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.2/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.2/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.2/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.2/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>sigma = 0.4</h7>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.4/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.4/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.4/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.4/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.4/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>sigma = 0.5</h7>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.5/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.5/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.5/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.5/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.5/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>sigma = 0.6</h7>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.6/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.6/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.6/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.6/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.6/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>sigma = 0.8</h7>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.8/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.8/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.8/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.8/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_0.8/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>sigma = 1.0</h7>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_1.0/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_1.0/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_1.0/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_1.0/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.2/saved_5_1.0/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="part1.2.3">
+                        <div class="description">
+                            <h4>1.2.3 Denoising Pure Noise</h4>
+                            <h4>epoch 1</h4>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_1_0.5/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_1_0.5/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_1_0.5/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_1_0.5/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_1_0.5/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h4>epoch 5</h4>
+                        </div>
+                        <div class="grid_3">
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_5_0.5/grid_0.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_5_0.5/grid_1.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_5_0.5/grid_2.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_5_0.5/grid_3.png" alt="selfie" class="q1_image">
+                            </figure>
+                            <figure>
+                                <img src="./partB/part1/1.2.3/saved_5_0.5/grid_4.png" alt="selfie" class="q1_image">
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <p>The general pattern of Denoising Pure Noise model is that it always produe a general shape that could possibly be any number. A blob of cloud in the middle
+                                I think one reason might be it was trained with all 10 digits and it can't observe any strong direction to one digit during training since the input is pure noise,
+                                it decided to produce the output that can potentially match all 10 digits in some way so a cloud of pixels.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="part2">
+                <div class="description">
+                    <h3>Part 2: Training a Flow Matching Model</h3>
+                </div>
+                <div class="part 2.1">
+                    <div class="description">
+                        <h4>2.1 Adding Time Conditioning to UNet</h4>
+                        <img src="./partB/part2/conditional_arch_fm.png" alt="selfie" class="unconditional_arch">
+                        <p>Use above structure to build time-conditioned Unet</p>
+                    </div>
+                </div>
+                <div class="part 2.2">
+                    <div class="description">
+                        <h4>2.2 Training the UNet</h4>
+                        <p>We will train time-conditioned model with following algorithm</p>
+                        <img src="./partB/part2/time_conditioned/algo1_t_only_fm.png" alt="selfie" class="unconditional_arch">
+                        <img src="./partB/part2/time_conditioned/time_cond_train_loss.png" alt="selfie" class="train_losses">
+                    </div>
+                </div>
+                <div class="part 2.3">
+                    <div class="description">
+                        <h4>2.3 Sampling from the UNet</h4>
+                        <p>We will generate time-conditioned model output with following algorithm</p>
+                        <img src="./partB/part2/time_conditioned/algo2_t_only_fm.png" alt="selfie" class="unconditional_arch">
+                        <h7>epoch 1</h7>
+                    </div>
+                    <div class="grid_1">
+                        <figure>
+                            <img src="./partB/part2/time_conditioned/0.png" alt="selfie" class="q1_image">
+                            <figcaption>input noise</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./partB/part2/time_conditioned/time_conditioned_0.png" alt="selfie" class="q1_image">
+                            <figcaption>output digits</figcaption>
+                        </figure>
+                    </div>
+                    <div class="description">
+                        <h7>epoch 5</h7>
+                    </div>
+                    <div class="grid_1">
+                        <figure>
+                            <img src="./partB/part2/time_conditioned/5.png" alt="selfie" class="q1_image">
+                            <figcaption>input noise</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./partB/part2/time_conditioned/time_conditioned_5.png" alt="selfie" class="q1_image">
+                            <figcaption>output digits</figcaption>
+                        </figure>
+                    </div>
+                    <div class="description">
+                        <h7>epoch 10</h7>
+                    </div>
+                    <div class="grid_1">
+                        <figure>
+                            <img src="./partB/part2/time_conditioned/9.png" alt="selfie" class="q1_image">
+                            <figcaption>input noise</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="./partB/part2/time_conditioned/time_conditioned_10.png" alt="selfie" class="q1_image">
+                            <figcaption>output digits</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                <div class="part 2.4">
+                    <div class="description">
+                        <h4>2.4 Adding Class-Conditioning to UNet</h4>
+                        <p>Adding classes during training by adding two more FCBlock with input class-conditioning vector, you make it a one-hot vector instead of a single scalar. </p>
+                        <p> Because we still want our UNet to work without it being conditioned on the class (recall the classifer-free guidance you implemented in part a), we implement dropout where 10% of the time we drop the class conditioning vector <code>c</code> setting it to 0. </p>
+                    </div>
+                </div>
+                <div class="part 2.5">
+                    <div class="description">
+                        <h4>2.5 Training the UNet</h4>
+                        <img src="./partB/part2/class_conditioned/algo3_c_fm.png" alt="selfie" class="unconditional_arch">
+                        <div class="grid_1"></div>
+                            <img src="./partB/part2/class_conditioned/train_losses_4.png" alt="selfie" class="train_losses">
+                            <img src="./partB/part2/class_conditioned_scheduler/train_losses_4.png" alt="selfie" class="train_losses">
+                        </div>
+                    </div>
+                </div>
+                <div class="part 2.6">
+                    <div class="description">
+                        <h4>2.6 Sampling from the UNet</h4>
+                        <img src="./partB/part2/class_conditioned/algo4_c_fm.png" alt="selfie" class="unconditional_arch">
+                        <p>Now we will sample with class-conditioning and will use classifier-free guidance with guidance_scale = 5</p>
+                    </div>
+                    <div class="description">
+                        <h4>training visualization with scheduler</h4>
+                        <div class="description">
+                            <h7>epoch 0</h7>
+                        </div>
+                        <div class="grid_1">
+                            <figure>
+                                <img src="./partB/part2/class_conditioned_scheduler/0.png" alt="selfie" class="q1_image">
+                                <figcaption>input noise</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="./partB/part2/class_conditioned_scheduler/class_conditioned_0.png" alt="selfie" class="q1_image">
+                                <figcaption>output digits</figcaption>
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>epoch 5</h7>
+                        </div>
+                        <div class="grid_1">
+                            <figure>
+                                <img src="./partB/part2/class_conditioned_scheduler/5.png" alt="selfie" class="q1_image">
+                                <figcaption>input noise</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="./partB/part2/class_conditioned_scheduler/class_conditioned_5.png" alt="selfie" class="q1_image">
+                                <figcaption>output digits</figcaption>
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>epoch 10</h7>
+                        </div>
+                        <div class="grid_1">
+                            <figure>
+                                <img src="./partB/part2/class_conditioned_scheduler/9.png" alt="selfie" class="q1_image">
+                                <figcaption>input noise</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="./partB/part2/class_conditioned_scheduler/class_conditioned_9.png" alt="selfie" class="q1_image">
+                                <figcaption>output digits</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <h4>training visualization without scheduler</h4>
+                        <div class="description">
+                            <h7>epoch 0</h7>
+                        </div>
+                        <div class="grid_1">
+                            <figure>
+                                <img src="./partB/part2/class_conditioned/0.png" alt="selfie" class="q1_image">
+                                <figcaption>input noise</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="./partB/part2/class_conditioned/class_conditioned_0.png" alt="selfie" class="q1_image">
+                                <figcaption>output digits</figcaption>
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>epoch 5</h7>
+                        </div>
+                        <div class="grid_1">
+                            <figure>
+                                <img src="./partB/part2/class_conditioned/5.png" alt="selfie" class="q1_image">
+                                <figcaption>input noise</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="./partB/part2/class_conditioned/class_conditioned_5.png" alt="selfie" class="q1_image">
+                                <figcaption>output digits</figcaption>
+                            </figure>
+                        </div>
+                        <div class="description">
+                            <h7>epoch 10</h7>
+                        </div>
+                        <div class="grid_1">
+                            <figure>
+                                <img src="./partB/part2/class_conditioned/9.png" alt="selfie" class="q1_image">
+                                <figcaption>input noise</figcaption>
+                            </figure>
+                            <figure>
+                                <img src="./partB/part2/class_conditioned/class_conditioned_9.png" alt="selfie" class="q1_image">
+                                <figcaption>output digits</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="description">
+                        <p>To compensate the loss of learning rate scheduler, I did the following</p>
+                        <p>I added gradient clipping to prevent gradient explosion 
+                            <code>torch.nn.utils.clip_grad_norm_(unet.parameters(), max_norm=1.0)</code>
+                        </p>
+                        <p>I also reduce learning rate to 5e-3 to avoid overshoot</p>
+                        <p>There is no big difference in training losses</p>
+                        <p>By comparing the visualizations, we can see there is no significant difference between using scheduelr and not using scheduelr</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer class="footnote">
         <div>© 2025 Jim Jiang</div>

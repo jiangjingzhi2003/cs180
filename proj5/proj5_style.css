@@ -17,6 +17,13 @@
     margin: 0 auto;       /* centers horizontally */
     padding: 20px;
 }
+.grid_1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 images per row */
+    gap: 15px;
+    max-width: 1000px;
+    margin: auto;
+}
 .grid_2 {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 images per row */
@@ -67,6 +74,16 @@ figcaption {
 }
 .q9_formula {
   width: 20%;
+  height: auto;
+  border-radius: 8px;
+}
+.unconditional_arch {
+  width: 80%;
+  height: auto;
+  border-radius: 8px;
+}
+.train_losses {
+  width: 45%;
   height: auto;
   border-radius: 8px;
 }

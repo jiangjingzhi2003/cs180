@@ -678,6 +678,8 @@
                 <div class="part1.2">
                     <div class="description">
                         <h4>1.2 Using the UNet to Train a Denoiser</h4>
+                        <img src="./partB/part1/part1.2/f1.png" alt="selfie" class="unconditional_arch">
+                        <p>Using above formula, we can create different noise level for each image</p>
                         <p>visualization of the noising process using sigma = [0.0,
           0.2, 0.4, 0.5, 0.6, 0.8, 1.0]</p>
                     </div>
@@ -937,8 +939,14 @@
                         </div>
                         <div class="description">
                             <p>The general pattern of Denoising Pure Noise model is that it always produe a general shape that could possibly be any number. A blob of cloud in the middle
-                                I think one reason might be it was trained with all 10 digits and it can't observe any strong direction to one digit during training since the input is pure noise,
-                                it decided to produce the output that can potentially match all 10 digits in some way so a cloud of pixels.
+                            </p>
+                            <p>Q: What relationship, if any, do these outputs have with the training images (e.g., digits 0–9)?
+                                A: these outputs (a cloud of pixels) seems encampass all posible training images
+                            </p>
+                            <p>
+                                Q: Why might this be happening?
+                                A: I think one reason might be it was trained with all 10 digits and it can't observe any strong direction to one digit during training since the input is pure noise,
+                                it decided to produce the output that can potentially match all 10 digits in some way so a cloud of pixels is always predicted.
                             </p>
                         </div>
                     </div>
@@ -1018,7 +1026,7 @@
                     <div class="description">
                         <h4>2.5 Training the UNet</h4>
                         <img src="./partB/part2/class_conditioned/algo3_c_fm.png" alt="selfie" class="unconditional_arch">
-                        <div class="grid_1"></div>
+                        <div class="grid_1">
                             <img src="./partB/part2/class_conditioned/train_losses_4.png" alt="selfie" class="train_losses">
                             <img src="./partB/part2/class_conditioned_scheduler/train_losses_4.png" alt="selfie" class="train_losses">
                         </div>

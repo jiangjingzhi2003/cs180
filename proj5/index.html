@@ -15,10 +15,39 @@
     </header>
     <main>
         <div class="partA">
+            <div class="description">
+                <h2>Part A</h3>
+            </div>
             <div class="part0">
                 <div class="description">
                     <h2>Part 0: Setup</h2>
-                    <p>prompts = ['a photo of a puppy',
+                    <p>All the embeddings I generated: ['a high quality picture',
+                        'an oil painting of a snowy mountain village',
+                        'a photo of the amalfi coast',
+                        'a photo of a man',
+                        'a photo of a hipster barista',
+                        'a photo of a puppy',
+                        'a photo of a cat',
+                        'a photo of dog fighting a cat',
+                        'an oil painting of people around a campfire',
+                        'an oil painting of an old man',
+                        'a lithograph of waterfalls',
+                        'a lithograph of a skull',
+                        'a lithograph of book',
+                        'a lithograph of a mountain',
+                        'a lithograph of cat',
+                        'a lithograph of a river',
+                        'a man wearing a hat',
+                        'a high quality photo',
+                        'a rocket ship',
+                        'a pencil',
+                        'a photo of New York',
+                        'a photo of mountains',
+                        'a painting of sunflowers',
+                        'a painting of village',
+                        '']
+                    </p>
+                    <p>Here is the prompt I used for part 0, prompts = ['a photo of a puppy',
                             'a photo of a cat',
                             'a photo of dog fighting a cat']
                     </p>
@@ -210,6 +239,7 @@
                 <div class="part1.5">
                     <div class="description">
                         <h3>1.5 Diffusion Model Sampling</h3>
+                        <p>In iterative_denoise function, we set i_start = 0 and passing im_noisy as random noise.</p>
                     </div>
                     <div class="grid_3">
                         <figure>
@@ -258,6 +288,9 @@
                 <div class="part1.7">
                     <div class="description">
                         <h3>1.7 Image-to-image Translation</h3>
+                        <p>run the forward process to get a noisy image, and then run the iterative_denoise_cfg function using a starting index of [1, 3, 5, 7, 10, 20] steps.
+                            with the conditional text prompt "a high quality photo".
+                        </p>
                     </div>
                     <div class="grid_5">
                         <figure>
@@ -664,6 +697,9 @@
             </div>
         </div>
         <div class="partB">
+            <div class="description">
+                <h2>Part B</h3>
+            </div>
             <div class="part1">
                 <div class="description">
                     <h3>Part 1: Training a Single-Step Denoising UNet</h3>
@@ -894,6 +930,9 @@
                                 <img src="./partB/part1/1.2.2/saved_5_1.0/grid_4.png" alt="selfie" class="q1_image">
                             </figure>
                         </div>
+                        <div class="description">
+                            <p>Denoiser performs relatively well when noise level less or close to 0.5. It's started to struggle to denoise the image when noise level become 0.8 or 1.0</p>
+                        </div>
                     </div>
                     <div class="part1.2.3">
                         <div class="description">
@@ -946,7 +985,7 @@
                             <p>
                                 Q: Why might this be happening?
                                 A: I think one reason might be it was trained with all 10 digits and it can't observe any strong direction to one digit during training since the input is pure noise,
-                                it decided to produce the output that can potentially match all 10 digits in some way so a cloud of pixels is always predicted.
+                                it decided to produce the output that can potentially match all 10 digits in some way so a cloud of pixels is always predicted. No time conditioned or class conditioned, the model tried to find "average point" for all possible output.
                             </p>
                         </div>
                     </div>
